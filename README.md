@@ -1,5 +1,5 @@
-# mirai-console-plugin-template
+# powered by mirai-console-plugin-template
 
-[Mirai Console](https://github.com/mamoe/mirai-console) 插件模板, 使用 Kotlin + Gradle.
+just mirai bot
 
-[如何使用](https://github.com/project-mirai/how-to-use-plugin-template)
+it is currently nothing here
