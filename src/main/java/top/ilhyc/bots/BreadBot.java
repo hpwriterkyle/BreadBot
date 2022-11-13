@@ -1,4 +1,4 @@
-package org.example.mirai.plugin;
+package top.ilhyc.bots;
 
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription;
@@ -6,7 +6,7 @@ import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.Event;
 import net.mamoe.mirai.event.EventChannel;
 import net.mamoe.mirai.event.GlobalEventChannel;
-import net.mamoe.mirai.event.events.FriendMessageEvent;
+import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 
 
@@ -26,26 +26,29 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
  * 不用复制到 mirai-console-loader 或其他启动器中调试
  */
 
-public final class JavaPluginMain extends JavaPlugin {
-    public static final JavaPluginMain INSTANCE = new JavaPluginMain();
-    private JavaPluginMain() {
-        super(new JvmPluginDescriptionBuilder("org.example.mirai-example", "0.1.0")
-                .info("EG")
+public final class BreadBot extends JavaPlugin {
+    public static final BreadBot INSTANCE = new BreadBot();
+
+    private BreadBot() {
+        super(new JvmPluginDescriptionBuilder("top.ilhyc", "0.1.0")
+                .name("BreadBot")
+                .author("qq为1853699150")
+                .info("start!")
                 .build());
     }
 
     @Override
     public void onEnable() {
-        getLogger().info("日志");
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
         eventChannel.subscribeAlways(GroupMessageEvent.class, g -> {
             //监听群消息
-            getLogger().info(g.getMessage().contentToString());
-
+            if(g.getGroup().getId()==978657054){
+            }
         });
-        eventChannel.subscribeAlways(FriendMessageEvent.class, f -> {
-            //监听好友消息
-            getLogger().info(f.getMessage().contentToString());
+        eventChannel.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, a->{
+            if(a.getInvitor().getId()==1853699150){  //短期辅助功能:)
+                a.accept();
+            }
         });
     }
 }
