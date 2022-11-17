@@ -9,6 +9,9 @@ import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 使用 Java 请把
@@ -28,6 +31,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 
 public final class BreadBot extends JavaPlugin {
     public static final BreadBot INSTANCE = new BreadBot();
+    public static List<Long> passgroup = new ArrayList<>();
 
     private BreadBot() {
         super(new JvmPluginDescriptionBuilder("top.ilhyc", "0.1.0")
@@ -35,6 +39,7 @@ public final class BreadBot extends JavaPlugin {
                 .author("qq为1853699150")
                 .info("start!")
                 .build());
+        passgroup.add(Long.parseLong("9978657054"));
     }
 
     @Override
@@ -42,7 +47,7 @@ public final class BreadBot extends JavaPlugin {
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
         eventChannel.subscribeAlways(GroupMessageEvent.class, g -> {
             //监听群消息
-            if(g.getGroup().getId()==978657054){
+            if(passgroup.contains(g.getGroup().getId())){
             }
         });
         eventChannel.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, a->{
